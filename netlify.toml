@@ -3,7 +3,7 @@
   publish = "public" # Netlify serves files from 'public' directly
 
 [[redirects]]
-  from = "/api/*"
+  from = "/views/*"
   to = "/.netlify/functions/api/:splat"
   status = 200
 
