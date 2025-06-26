@@ -1,50 +1,17 @@
 [build]
-  functions = "netlify/functions" # Directory where your serverless functions are located
-  # publish = "public" # If you have other static assets in 'public' that are not served by Express
+  functions = "netlify/functions"
+  publish = "public" # Netlify serves files from 'public' directly
 
-# This rewrite rule directs all requests starting with /api/
-# to your serverless function named 'api' (api.js).
-# It also handles the root path to serve your index.html via the function.
 [[redirects]]
-  from = "/*"
-  to = "/.netlify/functions/api/:splat" # The :splat captures the rest of the path
-  status = 200 # This makes it a rewrite (proxy) rather than a 301/302 redirect
+  from = "/api/*"
+  to = "/.netlify/functions/api/:splat"
+  status = 200
 
-# If you prefer to serve static assets from 'public' directly via Netlify and only API via function:
-# [build]
-#   functions = "netlify/functions"
-#   publish = "public"
-#
+# If your index.html is in views and not public, and you want Netlify to serve it via the function
+# (though it's often better to have index.html in public if using this publish method)
+# Example to make the function serve index.html at the root if it's in /views
+# This may need adjustment in your netlify/functions/api.js to serve /views/index.html at the root path
 # [[redirects]]
-#   from = "/api/*"
-#   to = "/.netlify/functions/api/:splat"
+#   from = "/"
+#   to = "/.netlify/functions/api/" # Function handles root, serving index.html
 #   status = 200
-#
-# # And if your index.html is in views and you want it at the root:
-# [[redirects]]
-#  from = "/"
-#  to = "/.netlify/functions/api/" # Or adjust to make the function serve views/index.html
-#  status = 200
-```The first `redirects` block is generally simpler if your Express app handles serving its own `index.html` from the root `/` path. The `from = "/*"` will route all requests to your `api` function, and your Express router inside `api.js` will handle them.
-
-**6. Update `package.json`:**
-
-Ensure `serverless-http`, `express`, and `cors` are in your `dependencies`:
-```json
-{
-  "name": "timestamp-microservice",
-  "version": "1.0.0",
-  "description": "A simple Timestamp Microservice for freeCodeCamp",
-  "main": "netlify/functions/api.js", // Optional: Point main to your function entry
-  "scripts": {
-    "start": "node index.js", // For local development (your original index.js)
-    "dev": "netlify dev"    // For local Netlify function testing with Netlify CLI
-  },
-  "dependencies": {
-    "cors": "^2.8.5",
-    "express": "^4.17.1", // or newer
-    "serverless-http": "^3.0.0" // or newer
-    // "dotenv" is good for local development via index.js, not strictly needed by the Netlify function itself
-  },
-  "license": "MIT"
-}
