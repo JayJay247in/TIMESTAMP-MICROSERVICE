@@ -40,7 +40,7 @@ This is a simple API project created as a solution for the freeCodeCamp "Timesta
 
 1.  **Clone the repository (if applicable):**
     ```bash
-    git clone <your-repository-url>
+    git clone https://github.com/JayJay247in/TIMESTAMP-MICROSERVICE.git
     cd timestamp-microservice
     ```
     Or ensure you have the project files as provided by the freeCodeCamp boilerplate.
