@@ -1,9 +1,12 @@
 [build]
-  functions = "netlify/functions" # Tells Netlify where your function source code is
+  functions = "netlify/functions"
 
-# This rewrite rule is crucial. It takes ALL incoming requests ("/*")
-# and sends them to your 'api' function. The :splat captures the rest of the path.
+# This tells Netlify to package these directories along with your function code.
+# The paths are relative to your project's root directory.
+[functions]
+  included_files = ["views/**", "public/**"]
+
 [[redirects]]
   from = "/*"
   to = "/.netlify/functions/api/:splat"
-  status = 200 # HTTP 200 makes it a rewrite (proxy), not a browser redirect
+  status = 200
