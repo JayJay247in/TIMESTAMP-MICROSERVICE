@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timestamp Microservice</title>
+    <link href="/style.css" rel="stylesheet" type="text/css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1>Timestamp Microservice</h1>
+        <hr />
+        <p>
+            This API service converts dates and Unix timestamps.
+        </p>
+        <h2>Usage:</h2>
+        <p>
+            Pass a date string or a Unix timestamp (in milliseconds) to the <code>/api/:date_string?</code> endpoint.
+        </p>
+        <p>
+            If no date string or timestamp is provided, the API will return the current time.
+        </p>
+
+        <h3>Example Usage:</h3>
+        <ul>
+            <li><code><a href="api/2015-12-25">[project url]/api/2015-12-25</a></code></li>
+            <li><code><a href="api/1451001600000">[project url]/api/1451001600000</a></code></li>
+            <li><code><a href="api/">[project url]/api/</a></code> (for current time)</li>
+        </ul>
+
+        <h3>Example Output:</h3>
+        <p>For a valid date string or timestamp:</p>
+        <code>{"unix":1451001600000, "utc":"Fri, 25 Dec 2015 00:00:00 GMT"}</code>
+        <p>For an invalid date:</p>
+        <code>{"error":"Invalid Date"}</code>
+        <p>For the current time (when no date is provided):</p>
+        <code>{"unix":1678886400000, "utc":"Wed, 15 Mar 2023 12:00:00 GMT"}</code> 
+        <small>(Example values, actual current time will vary)</small>
+    </div>
+    <footer>
+        <p>By <a href="https://www.freecodecamp.org">freeCodeCamp</a></p>
+    </footer>
+</body>
+</html>
