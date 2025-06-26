@@ -1,17 +1,9 @@
 [build]
-  functions = "netlify/functions"
-  publish = "public" # Netlify serves files from 'public' directly
+  functions = "netlify/functions" # Tells Netlify where your function source code is
 
+# This rewrite rule is crucial. It takes ALL incoming requests ("/*")
+# and sends them to your 'api' function. The :splat captures the rest of the path.
 [[redirects]]
-  from = "/views/*"
+  from = "/*"
   to = "/.netlify/functions/api/:splat"
-  status = 200
-
-# If your index.html is in views and not public, and you want Netlify to serve it via the function
-# (though it's often better to have index.html in public if using this publish method)
-# Example to make the function serve index.html at the root if it's in /views
-# This may need adjustment in your netlify/functions/api.js to serve /views/index.html at the root path
-# [[redirects]]
-#   from = "/"
-#   to = "/.netlify/functions/api/" # Function handles root, serving index.html
-#   status = 200
+  status = 200 # HTTP 200 makes it a rewrite (proxy), not a browser redirect

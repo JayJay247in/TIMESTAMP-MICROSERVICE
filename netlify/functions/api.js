@@ -13,12 +13,12 @@ app.use(cors({ optionsSuccessStatus: 200 }));
 // IMPORTANT: Adjust paths for serving static files from a serverless function context.
 // __dirname in a Netlify function refers to the function's directory.
 // We need to go up to the project root to find 'public' and 'views'.
-const projectRoot = path.resolve(__dirname, '../../'); // Goes up from netlify/functions/api.js
+const projectRoot = path.resolve(__dirname, '../../'); // Goes up from netlify/functions/api.js to project root
 
-app.use(express.static(path.join(projectRoot, 'public')));
+app.use(express.static(path.join(projectRoot, 'public'))); // For style.css
 
 app.get("/", function (req, res) {
-  res.sendFile(path.join(projectRoot, 'views/index.html'));
+  res.sendFile(path.join(projectRoot, 'views/index.html')); // For the landing page
 });
 
 // Your API endpoint
